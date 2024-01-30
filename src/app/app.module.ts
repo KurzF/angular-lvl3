@@ -11,11 +11,12 @@ import { CurrentConditionsComponent } from './current-conditions/current-conditi
 import { MainPageComponent } from './main-page/main-page.component';
 import {RouterModule} from "@angular/router";
 import {routing} from "./app.routing";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { TabsGroupComponent } from './tabs/tabs-group/tabs-group.component';
 import { TabComponent } from './tabs/tab.component';
+import { CacheInterceptor, HTTP_CACHE_DURATION_TOKEN } from './cache.interceptor';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,12 @@ import { TabComponent } from './tabs/tab.component';
     routing,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [LocationService, WeatherService],
+  providers: [
+    LocationService,
+    WeatherService,
+    { provide: HTTP_CACHE_DURATION_TOKEN, useValue: null },
+    { provide: HTTP_INTERCEPTORS, useClass: CacheInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
