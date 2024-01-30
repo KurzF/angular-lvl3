@@ -1,0 +1,14 @@
+.headers {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.close {
+    margin: 5px;
+}

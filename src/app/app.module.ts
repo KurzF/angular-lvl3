@@ -14,6 +14,8 @@ import {routing} from "./app.routing";
 import {HttpClientModule} from "@angular/common/http";
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { TabsGroupComponent } from './tabs/tabs-group/tabs-group.component';
+import { TabComponent } from './tabs/tab.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { environment } from '../environments/environment';
     FormsModule,
     HttpClientModule,
     RouterModule,
+    TabsGroupComponent,
+    TabComponent,
     routing,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],

@@ -1,0 +1,9 @@
+<div class="headers">
+    <div class="header" *ngFor="let tab of tabs; index as i" (click)="selected = i">
+        <h4>{{ tab.title }}</h4>
+
+        <span class="close" (click)="close(i)">&times;</span>
+    </div>
+</div>
+<div class="content" #content [ngTemplateOutlet]="selected_content()">
+</div>
