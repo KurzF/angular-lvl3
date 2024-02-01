@@ -7,8 +7,14 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    padding: 5px;
 }
 
 .close {
     margin: 5px;
+}
+
+.header.active {
+    color: #fff;
+    background-color: #286090;
 }
