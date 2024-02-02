@@ -22,7 +22,6 @@ export class LocationService {
   }
 
   removeLocation(zipcode : string) {
-    console.log("remove")
     let index = this._locations.value.indexOf(zipcode);
     if (index !== -1){
       let newLocations = [...this._locations.value];

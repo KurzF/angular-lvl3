@@ -6,7 +6,6 @@ import {CurrentConditions} from './current-conditions/current-conditions.type';
 import {ConditionsAndZip} from './conditions-and-zip.type';
 import {Forecast} from './forecasts-list/forecast.type';
 import { LocationService } from './location.service';
-import { map, publish } from 'rxjs/operators';
 
 @Injectable()
 export class WeatherService  implements OnDestroy {
@@ -27,7 +26,6 @@ export class WeatherService  implements OnDestroy {
   }
 
   getCurrentConditions(): Signal<ConditionsAndZip[]> {
-    console.log(this.currentConditions);
     return this.currentConditions.asReadonly();
   }
 
@@ -60,9 +58,7 @@ export class WeatherService  implements OnDestroy {
   private updateConditions(locations: string[]) {
       let added = locations.filter(zip => !this.currentConditions().some(c => c.zip === zip));
       let remain = this.currentConditions().filter(({zip}) => locations.some(l => l === zip));
-
-      console.log({ added, remain, locations});
-
+      
       forkJoin(added.map(zip => this.getCurrentCondition(zip)))
         .subscribe(conditions => {
           let conditionAndZips = conditions.map((c, i) => ({ zip: added[i], data: c }));
