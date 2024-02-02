@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './tabs-group.component.css'
 })
 export class TabsGroupComponent {
-  _selected = 0;
+  _selected = -1;
 
   @ContentChildren(TabComponent)
   tabs: QueryList<TabComponent>;
@@ -35,6 +35,9 @@ export class TabsGroupComponent {
 
   close(index: number) {
     this.tabs.get(index)?.close();
+    if(this.selected >= this.tabs.length) {
+      this.selected = this.tabs.length - 1;
+    }
   }
 
 
